@@ -89,3 +89,5 @@ temp/
 *.onnx
 code/backend_ai/models/*
 !code/backend_ai/models/.gitkeep
+code/backend_algo/models/*
+!code/backend_algo/models/.gitkeep

@@ -72,6 +72,30 @@ services:
       retries: 3
       start_period: 5s
 
+  # Python FastAPI Algorithm Backend
+  backend-algo:
+    build:
+      context: ./backend_algo
+      dockerfile: Dockerfile
+    container_name: pax-backend-algo
+    ports:
+      - "8002:8002"
+    environment:
+      PORT: 8002
+      HOST: 0.0.0.0
+      LOG_LEVEL: info
+    volumes:
+      - algo_models:/app/models
+    networks:
+      - pax-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8002/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
   # React Frontend
   frontend:
     build:
@@ -83,6 +107,7 @@ services:
     depends_on:
       - backend
       - backend-ai
+      - backend-algo
     networks:
       - pax-network
     restart: unless-stopped
@@ -100,4 +125,6 @@ volumes:
   postgres_data:
     driver: local
   ai_models:
+    driver: local
+  algo_models:
     driver: local
