@@ -12,6 +12,10 @@ COPY mvnw.cmd .
 # Make mvnw executable
 RUN chmod +x mvnw
 
+# Normalize line endings (remove CRLF) so the script's shebang is valid inside the Linux image
+# This prevents "/bin/sh: 1: ./mvnw: not found" when mvnw has Windows CRLF endings.
+RUN sed -i 's/\r$//' mvnw || true
+
 # Download dependencies
 RUN ./mvnw dependency:go-offline -B
 
