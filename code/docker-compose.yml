@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: pax-postgres
+    environment:
+      POSTGRES_DB: underwriting
+      POSTGRES_USER: pax_user
+      POSTGRES_PASSWORD: pax_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pax-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pax_user -d underwriting"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Java Spring Boot Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pax-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/underwriting
+      SPRING_DATASOURCE_USERNAME: pax_user
+      SPRING_DATASOURCE_PASSWORD: pax_password
+      AI_SERVICE_URL: http://backend-ai:8001
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - pax-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Python FastAPI AI Backend
+  backend-ai:
+    build:
+      context: ./backend_ai
+      dockerfile: Dockerfile
+    container_name: pax-backend-ai
+    ports:
+      - "8001:8001"
+    environment:
+      PORT: 8001
+      HOST: 0.0.0.0
+      LOG_LEVEL: info
+    volumes:
+      - ai_models:/app/models
+    networks:
+      - pax-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8001/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pax-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+      - backend-ai
+    networks:
+      - pax-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  pax-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  ai_models:
+    driver: local
