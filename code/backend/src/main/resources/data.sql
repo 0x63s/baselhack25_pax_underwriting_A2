@@ -43,7 +43,8 @@ INSERT INTO question (offering_id, title, description, type, type_options) VALUE
 (1, 'Weight', 'What is your weight in kg?', 'NUMBER', NULL),
 (1, 'Smoking Status', 'Are you a smoker?', 'RADIO_BUTTON', 'Yes,No'),
 (1, 'Medical Conditions', 'Do you have any medical conditions? (select all that apply)', 'TAGS', 'none,anxiety,insomnia,gastritis,stress,heart disease,back pain,high cholesterol,arthritis,diabetes,asthma,hypertension,other'),
-(1, 'Occupation', 'What is your job occupation?', 'TEXT', NULL),
+(1, 'Occupation', 'What is your job occupation?', 'TEXT', 'sedentary/office,manual labor,healthcare,emergency services,unemployed,other'),
+-- (1, 'Occupation', 'What is your job occupation?', 'TEXT', NULL),
 (1, 'Annual Income', 'What is your annual income?', 'NUMBER', NULL),
 (1, 'Age', 'What is your age?', 'NUMBER', NULL),
 (1, 'Sport Activities', 'What sport activities do you participate in? (select all that apply)', 'TAGS', 'cycling,running,hiking,tennis,gym,dancing,skiing,pilates,swimming,yoga,climbing,boxing,other');
@@ -56,8 +57,8 @@ INSERT INTO question_weights (parameter_weight, question_id, weights) VALUES
 (0.5, 6, '-,29999:0.7;30000,80000:0.2;80001,120000:0.1;120001,|:0.1'),
 (0.22, 4, 'none:1;stress:0.95;insomnia:0.9;gastritis:0.85;back pain:0.8;anxiety:0.75;high cholesterol:0.65;hypertension:0.55;asthma:0.5;arthritis:0.45;diabetes:0.3;heart disease:0.2;other:0.6'),
 (0.18, 5, 'sedentary/office:0.6;manual labor:0.7;healthcare:0.4;emergency services:0.8;unemployed:0.5;other:0.3'),
-(0.35, 3, 'non-smoker:0.1;former smoker (> 5 yrs):0.3;former smoker (< 5 yrs):0.6;current (1-10/day):0.8;current (10+/day):1.0;vapes only:0.5'),
-(0.1, 8, 'running:0.1;swimming:0.1;cycling:0.1;yoga:0.05;team sports:0.2;extreme sports:0.7;none:0.5');
+(0.35, 3, 'No:0.1;Yes:0.5'),
+(0.1, 8, 'cycling:0.2;running:0.3;hiking:0.3;tennis:0.4;gym:0.2;dancing:0.3;skiing:0.5;pilates:0.1;swimming:0.1;yoga:0.3;climbing:0.4;boxing:0.7;other:0.2');
 
 
 
