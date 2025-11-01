@@ -1,7 +1,6 @@
 package ch.baselhack.underwriting.service;
 
-import ch.baselhack.underwriting.dto.questions.CreateQuestionDTO;
-import ch.baselhack.underwriting.dto.questions.GetQuestionDTO;
+import ch.baselhack.underwriting.dto.questions.*;
 
 import java.util.List;
 
@@ -11,4 +10,5 @@ public interface QuestionService {
     GetQuestionDTO createQuestion(CreateQuestionDTO getQuestionDTO);
 
     List<GetQuestionDTO> getQuestions();
+
 }

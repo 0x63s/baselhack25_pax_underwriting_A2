@@ -42,16 +42,4 @@ public class Client {
 
     @NotNull(message = "zip number must not be empty")
     private Number zip;
-
-    private Number height;
-
-    private Number weight;
-
-    private Boolean isSmoker;
-
-    private String medicalConditions;
-
-    private String job_occupation;
-
-    private Number annual_income;
 }
