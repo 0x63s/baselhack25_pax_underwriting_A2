@@ -52,6 +52,12 @@ npm start
 
 The frontend will be available at http://localhost:3000
 
+For running in dev version with hot reload:
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
 #### Backend (Java/Spring Boot)
 
 ```bash
