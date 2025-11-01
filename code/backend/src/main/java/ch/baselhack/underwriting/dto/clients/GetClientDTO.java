@@ -1,9 +1,9 @@
 package ch.baselhack.underwriting.dto.clients;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -22,9 +22,25 @@ public class GetClientDTO {
 
     private String canton;
 
-    //private Date birthDate;
+    private LocalDate birthDate;
 
     private String email;
 
     private String phoneNumber;
+
+    private String gender;
+
+    private Number zip;
+
+    private Number height;
+
+    private Number weight;
+
+    private Boolean isSmoker;
+
+    private String medicalConditions;
+
+    private String job_occupation;
+
+    private Number annual_income;
 }

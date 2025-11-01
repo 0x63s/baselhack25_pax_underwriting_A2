@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,12 +26,33 @@ public class CreateClientDTO {
     @NotNull(message = "Canton must not be empty")
     private String canton;
 
-    //@NotNull(message = "Birth date must not be empty")
-    //private Date birthDate;
+    @NotNull(message = "Birth date must not be empty")
+    private LocalDate birthDate;
 
     @NotNull(message = "Email must not be empty")
     private String email;
 
     @NotNull(message = "Phone number must not be empty")
     private String phoneNumber;
+
+    @NotNull(message = "gender must not be empty")
+    private String gender;
+
+    @NotNull(message = "zip number must not be empty")
+    private Number zip;
+
+    @NotNull(message = "height number must not be empty")
+    private Number height;
+
+    @NotNull(message = "weight number must not be empty")
+    private Number weight;
+
+    @NotNull(message = "is smoker must not be empty")
+    private Boolean isSmoker;
+
+    private String medicalConditions;
+
+    private String job_occupation;
+
+    private Number annual_income;
 }
