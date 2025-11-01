@@ -14,4 +14,6 @@ public class CreateQuestionWeightsDTO {
 
     @NotNull
     private String weights;
+
+    private double parameterWeight;
 }

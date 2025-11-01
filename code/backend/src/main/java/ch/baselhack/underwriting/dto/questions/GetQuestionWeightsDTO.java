@@ -11,4 +11,5 @@ public class GetQuestionWeightsDTO {
     private Long id;
     private Long questionId;
     private String weights;
+    private double parameterWeight;
 }

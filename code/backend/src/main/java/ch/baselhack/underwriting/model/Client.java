@@ -38,9 +38,6 @@ public class Client {
     @NotNull(message = "Phone number must not be empty")
     private String phoneNumber;
 
-    @NotNull(message = "gender must not be empty")
-    private String gender;
-
     @NotNull(message = "zip number must not be empty")
     private Integer zip;
 }
