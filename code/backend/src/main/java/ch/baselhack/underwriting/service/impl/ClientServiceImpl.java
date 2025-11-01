@@ -2,13 +2,18 @@ package ch.baselhack.underwriting.service.impl;
 
 import ch.baselhack.underwriting.dto.clients.CreateClientDTO;
 import ch.baselhack.underwriting.dto.clients.GetClientDTO;
+import ch.baselhack.underwriting.exception.offerings.NoOfferingsFoundException;
 import ch.baselhack.underwriting.exception.offerings.OfferingAlreadyExistsException;
 import ch.baselhack.underwriting.model.Client;
 import ch.baselhack.underwriting.repository.ClientRepository;
 import ch.baselhack.underwriting.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -22,5 +27,16 @@ public class ClientServiceImpl implements ClientService {
             throw new OfferingAlreadyExistsException("Client with name " + createClient.getFirstName() + createClient.getLastName() + " already exists");
         }
         return modelMapper.map(clientRepository.save(modelMapper.map(createClient, Client.class)), GetClientDTO.class);
+    }
+
+    @Override
+    public List<GetClientDTO> getClients() {
+        List<Client> clients = clientRepository.findAll();
+
+        if (clients.isEmpty()) {
+            throw new NoOfferingsFoundException();
+        }
+        Type listType = new TypeToken<List<GetClientDTO>>() {}.getType();
+        return modelMapper.map(clients, listType);
     }
 }
