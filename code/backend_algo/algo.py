@@ -1,4 +1,3 @@
-
 import numpy as np
 
 data_sample = {
@@ -47,10 +46,21 @@ def evaluate_categories(categories, user_value, scores):
     i = categories.index(user_value)
     return scores[i]
 
+def evaluate_multivalue_categories(categories, user_value, scores):
+    """
+    Calculate multi-valued scores for categories
+    """
+    user_values = user_value.split(";")
+    max_value = max(scores)
+    total_value = 0
+    for val in user_values:
+        total_value += evaluate_categories(categories, val, scores)
+        if total_value > max_value:
+            return max_value
+    return max_value
 
 def get_score_for_user_input(data, user_input):
     model_categories = data.keys()
-
     total_score = 0
 
     for key in list(model_categories):
@@ -63,10 +73,12 @@ def get_score_for_user_input(data, user_input):
             score = evaluate_bins(bins, user_value, scores)
         else:
             categories = data[key]["categories"]
-            score = evaluate_categories(categories, user_value, scores)
+            if ";" in user_value:
+                score = evaluate_multivalue_categories(categories, user_value, scores)
+            else:
+                score = evaluate_categories(categories, user_value, scores)
 
         print(score, key)
-
         total_score += score
 
     return total_score
