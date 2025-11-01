@@ -13,6 +13,7 @@ import ch.baselhack.underwriting.repository.OfferingRepository;
 import ch.baselhack.underwriting.repository.QuestionRepository;
 import ch.baselhack.underwriting.repository.QuestionWeightsRepository;
 import ch.baselhack.underwriting.service.QuestionService;
+import ch.baselhack.underwriting.service.QuestionWeightsService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -23,21 +24,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class QuestionServiceImpl implements QuestionService {
+public class QuestionWeightsServiceImpl implements QuestionWeightsService {
     private final QuestionRepository questionRepository;
     private final QuestionWeightsRepository questionWeightsRepository;
-    private final OfferingRepository offeringRepository;
     private final ModelMapper modelMapper;
-
-    private Question updateQuestion(Question question, CreateQuestionDTO questionDto) {
-        question.setTitle(questionDto.getTitle());
-        question.setDescription(questionDto.getDescription());
-        question.setType(questionDto.getType());
-        question.setTypeOptions(questionDto.getTypeOptions());
-        question.setOffering(modelMapper.map(offeringRepository.findById(questionDto.getOffering_id()), Offering.class));
-
-        return question;
-    }
 
     private QuestionWeights buildQuestion(QuestionWeights questionWeights, CreateQuestionWeightsDTO questionWeightsDTO) {
         questionWeights.setWeights(questionWeightsDTO.getWeights());
@@ -46,32 +36,36 @@ public class QuestionServiceImpl implements QuestionService {
         return questionWeights;
     }
 
-
     @Override
-    public GetQuestionDTO getQuestion(Long id) {
-        if (!questionRepository.existsById(id)) {
-            throw new QuestionNotFoundException(id);
+    public GetQuestionWeightsDTO getQuestionWeights(Long questionId) {
+        if (!questionRepository.existsById(questionId)) {
+            throw new QuestionNotFoundException(questionId);
         }
-        return modelMapper.map(questionRepository.findById(id).get(), GetQuestionDTO.class);
+
+        if (questionWeightsRepository.findByQuestionId(questionId).isEmpty()) {
+            throw new QuestionWeightsNotFoundException(questionId);
+        }
+
+        return modelMapper.map(questionWeightsRepository.findByQuestionId(questionId).get(), GetQuestionWeightsDTO.class);
+
     }
 
     @Override
-    public GetQuestionDTO createQuestion(CreateQuestionDTO question) {
-        if (questionRepository.existsByOfferingIdAndTitle(question.getOffering_id(), question.getTitle())) {
-            throw new QuestionAlreadyExistsException();
-        }
-        if (!offeringRepository.existsById(question.getOffering_id())) {
-            throw new OfferingNotFoundException(question.getOffering_id());
+    public GetQuestionWeightsDTO createQuestionWeights(CreateQuestionWeightsDTO createQuestionWeightsDTO) {
+        if (questionWeightsRepository.findByQuestionId(createQuestionWeightsDTO.getQuestionId()).isPresent()) {
+            throw new QuestionWeightsAlreadyExistsException(createQuestionWeightsDTO.getQuestionId());
         }
 
-        return modelMapper.map(questionRepository.save(updateQuestion(new Question(), question)), GetQuestionDTO.class);
+        return modelMapper.map(questionWeightsRepository.save(buildQuestion(new QuestionWeights(), createQuestionWeightsDTO)), GetQuestionWeightsDTO.class);
     }
 
     @Override
-    public List<GetQuestionDTO> getQuestions() {
-        List<Question> questions = questionRepository.findAll();
+    public GetQuestionWeightsDTO updateQuestionWeights(Long questionId, UpdateQuestionWeightsDTO updateQuestionWeightsDTO) {
+        QuestionWeights questionWeights = questionWeightsRepository.findByQuestionId(questionId).get();
 
-        Type listType = new TypeToken<List<GetQuestionDTO>>() {}.getType();
-        return modelMapper.map(questions, listType);
+        questionWeights.setWeights(updateQuestionWeightsDTO.getWeights());
+        QuestionWeights updatedQuestionWeights = questionWeightsRepository.save(questionWeights);
+
+        return modelMapper.map(updatedQuestionWeights, GetQuestionWeightsDTO.class);
     }
 }

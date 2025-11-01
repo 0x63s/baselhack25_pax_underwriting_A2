@@ -43,5 +43,4 @@ public class Client {
 
     @NotNull(message = "zip number must not be empty")
     private Number zip;
-
 }

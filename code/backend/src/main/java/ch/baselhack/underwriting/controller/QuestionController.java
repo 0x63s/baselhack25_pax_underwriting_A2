@@ -1,9 +1,9 @@
 package ch.baselhack.underwriting.controller;
 
-import ch.baselhack.underwriting.dto.questions.CreateQuestionDTO;
-import ch.baselhack.underwriting.dto.questions.GetQuestionDTO;
+import ch.baselhack.underwriting.dto.questions.*;
 import ch.baselhack.underwriting.repository.QuestionRepository;
 import ch.baselhack.underwriting.service.QuestionService;
+import ch.baselhack.underwriting.service.QuestionWeightsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
