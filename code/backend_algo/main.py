@@ -1,8 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Any, Coroutine
 import uvicorn
+from algo import get_score_and_decision_based_on_id
 
 app = FastAPI(
     title="PAX Underwriting AI Service",
@@ -44,7 +45,15 @@ async def root():
 async def health():
     return {
         "status": "healthy",
-        "service": "ai-backend"
+        "service": "algo-backend"
+    }
+
+@app.get("/score_and_result/{user_id}/{offering_id}")
+async def score(user_id: str, offering_id: str) -> dict[str, Any]:
+    score_, result = get_score_and_decision_based_on_id(user_id, offering_id)
+    return {
+        "score": score_,
+        "result": result
     }
 
 @app.post("/api/analyze", response_model=UnderwritingResponse)
