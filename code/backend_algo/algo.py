@@ -143,7 +143,7 @@ def get_score_and_decision_based_on_id(user_id, offering_id):
         question_id = submission["question"]["id"]
         offering_id_new = submission["question"]["offering"]["id"]
 
-        if offering_id_new == offering_id:
+        if int(offering_id_new) == int(offering_id):
             weight_array = requests.get(f"http://pax-backend-dev:8080/api/v1/question-weights/{question_id}").json()
             weights = weight_array["weights"]
 
