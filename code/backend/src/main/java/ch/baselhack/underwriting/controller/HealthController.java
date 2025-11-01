@@ -15,11 +15,7 @@ public class HealthController {
     @GetMapping("/health")
     public ResponseEntity<Map<String, String>> health() {
         Map<String, String> response = new HashMap<>();
-<<<<<<< Updated upstream
-        response.put("status", "helthcheck");
-=======
         response.put("status", "healthy");
->>>>>>> Stashed changes
         response.put("service", "backend");
         return ResponseEntity.ok(response);
     }
