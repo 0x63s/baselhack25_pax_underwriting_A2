@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 import static ch.baselhack.underwriting.resources.constants.ApplicationConstants.CLIENTS_API;
 
@@ -33,7 +32,7 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetClientDTO> getOffering(@PathVariable UUID id) {
+    public ResponseEntity<GetClientDTO> getOffering(@PathVariable Long id) {
         return  ResponseEntity.ok(clientService.getClientsById(id));
     }
 }

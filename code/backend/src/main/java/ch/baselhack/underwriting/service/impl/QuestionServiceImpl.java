@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +38,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
-    public GetQuestionDTO getQuestion(UUID id) {
+    public GetQuestionDTO getQuestion(Long id) {
         if (!questionRepository.existsById(id)) {
             throw new QuestionNotFoundException(id);
         }

@@ -4,13 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetClientDTO {
-    private UUID id;
+    private Long id;
 
     private String firstName;
 
@@ -32,15 +31,4 @@ public class GetClientDTO {
 
     private Number zip;
 
-    private Number height;
-
-    private Number weight;
-
-    private Boolean isSmoker;
-
-    private String medicalConditions;
-
-    private String job_occupation;
-
-    private Number annual_income;
 }

@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -47,7 +46,7 @@ public class SubmissionServiceImpl implements SubmissionService {
     }
 
     @Override
-    public GetSubmissionDTO getSubmission(UUID submissionId) {
+    public GetSubmissionDTO getSubmission(Long submissionId) {
         if (!submissionRepository.existsById(submissionId)) {
             throw new SubmissionNotFoundException(submissionId);
         }
@@ -55,7 +54,7 @@ public class SubmissionServiceImpl implements SubmissionService {
     }
 
     @Override
-    public List<GetSubmissionDTO> getSubmissionsByClient(UUID clientId) {
+    public List<GetSubmissionDTO> getSubmissionsByClient(Long clientId) {
         if (!clientRepository.existsById(clientId)) {
             throw new ClientNotFoundExceptions(clientId);
         }

@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.lang.reflect.Type;
-import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -44,7 +43,7 @@ public class OfferingServiceImpl implements OfferingService {
     }
 
     @Override
-    public GetOfferingDTO getOfferingById(UUID id) {
+    public GetOfferingDTO getOfferingById(Long id) {
         if (!offeringRepository.existsById(id)) {
             throw new OfferingNotFoundException(id);
         }

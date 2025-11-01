@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 import static ch.baselhack.underwriting.resources.constants.ApplicationConstants.QUESTIONS_API;
 
@@ -28,7 +27,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetQuestionDTO> getQuestionById(@PathVariable UUID id) {
+    public ResponseEntity<GetQuestionDTO> getQuestionById(@PathVariable Long id) {
         return new ResponseEntity<>(questionService.getQuestion(id), HttpStatus.OK);
     }
 

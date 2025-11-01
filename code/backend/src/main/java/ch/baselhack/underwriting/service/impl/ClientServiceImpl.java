@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -44,7 +43,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public GetClientDTO getClientsById(UUID id) {
+    public GetClientDTO getClientsById(Long id) {
         if (!clientRepository.existsById(id)) {
             throw new OfferingNotFoundException(id);
         }

@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 import static ch.baselhack.underwriting.resources.constants.ApplicationConstants.SUBMISSION_API;
 
@@ -22,7 +21,7 @@ public class SubmissionController {
     private final SubmissionService submissionService;
 
     @GetMapping("/{clientId}")
-    public ResponseEntity<List<GetSubmissionDTO>> getSubmissionsByClient(@PathVariable UUID clientId) {
+    public ResponseEntity<List<GetSubmissionDTO>> getSubmissionsByClient(@PathVariable Long clientId) {
         return ResponseEntity.ok(submissionService.getSubmissionsByClient(clientId));
     }
 

@@ -1,0 +1,95 @@
+@startuml data-model
+
+!define ENTITY class
+!define ENUM enum
+
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor<<Entity>> LightBlue
+    BackgroundColor<<Enum>> LightYellow
+    BorderColor Black
+    ArrowColor Black
+}
+
+' Entities
+ENTITY Client <<Entity>> {
+    + id: UUID {PK}
+    --
+    firstName: String
+    lastName: String
+    address: String
+    city: String
+    canton: String
+    birthDate: Date
+    email: String
+    phoneNumber: String
+    gender: String
+    zip: Number
+}
+
+ENTITY Offering <<Entity>> {
+    + id: UUID {PK}
+    --
+    name: String
+    description: String
+}
+
+ENTITY Question <<Entity>> {
+    + id: UUID {PK}
+    --
+    title: String
+    description: String
+    type: QuestionType
+    typeOptions: String
+    offering_id: UUID {FK}
+}
+
+ENTITY Submission <<Entity>> {
+    + id: UUID {PK}
+    --
+    value: String
+    type: SubmissionValueType
+    client_id: UUID {FK}
+    question_id: UUID {FK}
+}
+
+' Enums
+ENUM QuestionType <<Enum>> {
+    TEXT
+    NUMBER
+    DATE
+    RADIO_BUTTON
+    CHECKBOX
+    DROPDOWN
+}
+
+ENUM SubmissionValueType <<Enum>> {
+    TEXT
+    NUMBER
+    DATE
+}
+
+' Relationships
+Offering "1" -- "0..*" Question : contains >
+Question "1" -- "0..*" Submission : answered by >
+Client "1" -- "1" Submission : submits >
+
+' Enum usage relationships
+Question "1" *-- "1" QuestionType : type
+Submission "1" *-- "1" SubmissionValueType : type
+
+' Layout hints
+Offering -[hidden]down- Client
+Question -[hidden]down- Submission
+
+note right of Submission
+  Submission has a 1:1 relationship
+  with Client (CASCADE ALL, EAGER)
+end note
+
+note right of Question
+  Questions belong to an Offering
+  and can have multiple answer types
+end note
+
+@enduml

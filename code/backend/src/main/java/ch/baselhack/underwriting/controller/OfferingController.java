@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 import static ch.baselhack.underwriting.resources.constants.ApplicationConstants.OFFERINGS_API;
 
@@ -33,7 +32,7 @@ public class OfferingController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetOfferingDTO> getOffering(@PathVariable UUID id) {
+    public ResponseEntity<GetOfferingDTO> getOffering(@PathVariable Long id) {
         return  ResponseEntity.ok(offeringService.getOfferingById(id));
     }
 }
