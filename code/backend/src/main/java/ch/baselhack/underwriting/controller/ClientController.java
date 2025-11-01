@@ -32,8 +32,8 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getClients());
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<GetOfferingDTO> getOffering(@PathVariable UUID id) {
-//        return  ResponseEntity.ok(offeringService.getOfferingById(id));
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<GetClientDTO> getOffering(@PathVariable UUID id) {
+        return  ResponseEntity.ok(clientService.getClientsById(id));
+    }
 }
