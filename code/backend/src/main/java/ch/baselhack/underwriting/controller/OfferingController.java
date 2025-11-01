@@ -2,11 +2,13 @@ package ch.baselhack.underwriting.controller;
 
 import ch.baselhack.underwriting.dto.offerings.CreateOfferingDTO;
 import ch.baselhack.underwriting.dto.offerings.GetOfferingDTO;
+import ch.baselhack.underwriting.dto.offerings.UpdateOfferingDTO;
 import ch.baselhack.underwriting.model.Offering;
 import ch.baselhack.underwriting.service.OfferingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,5 +36,16 @@ public class OfferingController {
     @GetMapping("/{id}")
     public ResponseEntity<GetOfferingDTO> getOffering(@PathVariable Long id) {
         return  ResponseEntity.ok(offeringService.getOfferingById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GetOfferingDTO> updateOffering(@PathVariable Long id, @Valid @RequestBody UpdateOfferingDTO offering) {
+        return ResponseEntity.ok(offeringService.updateOffering(id, offering));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOffering(@PathVariable Long id) {
+        offeringService.deleteOffering(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

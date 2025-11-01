@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
-import { offeringApi, questionApi, clientApi, submissionApi } from '../../services/api';
+import { offeringApi, questionApi, clientApi, applicationApi } from '../../services/api';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -11,9 +11,9 @@ const AdminDashboard = () => {
     offerings: 0,
     questions: 0,
     clients: 0,
-    submissions: 0,
+    applications: 0,
+    pendingReviews: 0,
   });
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadStats();
@@ -21,22 +21,23 @@ const AdminDashboard = () => {
 
   const loadStats = async () => {
     try {
-      const [offeringsRes, questionsRes, clientsRes] = await Promise.all([
-        offeringApi.getAllOfferings(),
-        questionApi.getAllQuestions(),
-        clientApi.getAllClients(),
+      const [offeringsRes, questionsRes, clientsRes, applicationsRes, unreviewedRes] = await Promise.all([
+        offeringApi.getAllOfferings().catch(() => ({ data: [] })),
+        questionApi.getAllQuestions().catch(() => ({ data: [] })),
+        clientApi.getAllClients().catch(() => ({ data: [] })),
+        applicationApi.getAllApplications().catch(() => ({ data: [] })),
+        applicationApi.getUnreviewedApplications().catch(() => ({ data: [] })),
       ]);
 
       setStats({
         offerings: offeringsRes.data.length,
         questions: questionsRes.data.length,
         clients: clientsRes.data.length,
-        submissions: 0, // We'll need to sum up submissions per client
+        applications: applicationsRes.data.length,
+        pendingReviews: unreviewedRes.data.length,
       });
     } catch (error) {
       console.error('Error loading stats:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -66,11 +67,11 @@ const AdminDashboard = () => {
           onClick={() => navigate('/admin/offerings')}
         />
         <StatCard
-          title="Questions"
+          title="Total Questions"
           value={stats.questions}
           icon="❓"
           color="green"
-          onClick={() => navigate('/admin/questions')}
+          onClick={() => navigate('/admin/offerings')}
         />
         <StatCard
           title="Clients"
@@ -80,22 +81,29 @@ const AdminDashboard = () => {
           onClick={() => navigate('/admin/clients')}
         />
         <StatCard
-          title="Submissions"
-          value={stats.submissions}
-          icon="📝"
+          title="Applications"
+          value={stats.applications}
+          icon="📋"
+          color="indigo"
+          onClick={() => navigate('/admin/applications')}
+        />
+        <StatCard
+          title="Pending Reviews"
+          value={stats.pendingReviews}
+          icon="⏳"
           color="orange"
-          onClick={() => navigate('/admin/submissions')}
+          onClick={() => navigate('/admin/applications')}
         />
       </div>
 
       <div className="quick-actions">
         <Card title="Quick Actions">
           <div className="action-buttons">
-            <Button onClick={() => navigate('/admin/offerings/new')}>
-              Create New Offering
+            <Button onClick={() => navigate('/admin/offerings')} variant="primary">
+              Manage Offerings
             </Button>
-            <Button variant="success" onClick={() => navigate('/admin/questions/new')}>
-              Add Question
+            <Button variant="success" onClick={() => navigate('/admin/applications')}>
+              Review Applications
             </Button>
             <Button variant="secondary" onClick={() => navigate('/admin/clients')}>
               View All Clients

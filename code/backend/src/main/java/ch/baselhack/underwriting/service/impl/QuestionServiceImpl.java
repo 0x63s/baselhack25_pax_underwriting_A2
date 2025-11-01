@@ -39,6 +39,16 @@ public class QuestionServiceImpl implements QuestionService {
         return question;
     }
 
+    private Question updateQuestion(Question question, UpdateQuestionDTO questionDto) {
+        question.setTitle(questionDto.getTitle());
+        question.setDescription(questionDto.getDescription());
+        question.setType(questionDto.getType());
+        question.setTypeOptions(questionDto.getTypeOptions());
+        question.setOffering(modelMapper.map(offeringRepository.findById(questionDto.getOffering_id()), Offering.class));
+
+        return question;
+    }
+
     private QuestionWeights buildQuestion(QuestionWeights questionWeights, CreateQuestionWeightsDTO questionWeightsDTO) {
         questionWeights.setWeights(questionWeightsDTO.getWeights());
         questionWeights.setQuestion(modelMapper.map(questionRepository.findById(questionWeightsDTO.getQuestionId()), Question.class));
@@ -73,5 +83,36 @@ public class QuestionServiceImpl implements QuestionService {
 
         Type listType = new TypeToken<List<GetQuestionDTO>>() {}.getType();
         return modelMapper.map(questions, listType);
+    }
+
+    @Override
+    public List<GetQuestionDTO> getQuestionsByOfferingId(Long offeringId) {
+        if (!offeringRepository.existsById(offeringId)) {
+            throw new OfferingNotFoundException(offeringId);
+        }
+        List<Question> questions = questionRepository.findByOfferingId(offeringId);
+        Type listType = new TypeToken<List<GetQuestionDTO>>() {}.getType();
+        return modelMapper.map(questions, listType);
+    }
+
+    @Override
+    public GetQuestionDTO updateQuestion(Long id, UpdateQuestionDTO questionDTO) {
+        Question question = questionRepository.findById(id)
+            .orElseThrow(() -> new QuestionNotFoundException(id));
+
+        if (!offeringRepository.existsById(questionDTO.getOffering_id())) {
+            throw new OfferingNotFoundException(questionDTO.getOffering_id());
+        }
+
+        question = updateQuestion(question, questionDTO);
+        return modelMapper.map(questionRepository.save(question), GetQuestionDTO.class);
+    }
+
+    @Override
+    public void deleteQuestion(Long id) {
+        if (!questionRepository.existsById(id)) {
+            throw new QuestionNotFoundException(id);
+        }
+        questionRepository.deleteById(id);
     }
 }

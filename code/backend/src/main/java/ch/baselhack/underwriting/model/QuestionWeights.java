@@ -11,9 +11,11 @@ public class QuestionWeights {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "question_id")
     Question question;
 
     private String weights;
+
+    private double parameterWeight;
 }

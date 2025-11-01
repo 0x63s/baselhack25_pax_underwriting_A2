@@ -2,6 +2,7 @@ package ch.baselhack.underwriting.service.impl;
 
 import ch.baselhack.underwriting.dto.offerings.CreateOfferingDTO;
 import ch.baselhack.underwriting.dto.offerings.GetOfferingDTO;
+import ch.baselhack.underwriting.dto.offerings.UpdateOfferingDTO;
 import ch.baselhack.underwriting.exception.offerings.NoOfferingsFoundException;
 import ch.baselhack.underwriting.exception.offerings.OfferingAlreadyExistsException;
 import ch.baselhack.underwriting.exception.offerings.OfferingNotFoundException;
@@ -48,5 +49,24 @@ public class OfferingServiceImpl implements OfferingService {
             throw new OfferingNotFoundException(id);
         }
         return modelMapper.map(offeringRepository.findById(id).get(), GetOfferingDTO.class);
+    }
+
+    @Override
+    public GetOfferingDTO updateOffering(Long id, UpdateOfferingDTO updateOfferingDTO) {
+        Offering offering = offeringRepository.findById(id)
+            .orElseThrow(() -> new OfferingNotFoundException(id));
+
+        offering.setName(updateOfferingDTO.getName());
+        offering.setDescription(updateOfferingDTO.getDescription());
+
+        return modelMapper.map(offeringRepository.save(offering), GetOfferingDTO.class);
+    }
+
+    @Override
+    public void deleteOffering(Long id) {
+        if (!offeringRepository.existsById(id)) {
+            throw new OfferingNotFoundException(id);
+        }
+        offeringRepository.deleteById(id);
     }
 }

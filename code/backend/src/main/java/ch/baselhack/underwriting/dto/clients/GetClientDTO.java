@@ -27,8 +27,6 @@ public class GetClientDTO {
 
     private String phoneNumber;
 
-    private String gender;
-
     private Number zip;
 
 }

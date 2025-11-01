@@ -27,12 +27,12 @@ public class QuestionWeightsController {
     }
 
     @PostMapping
-    public ResponseEntity<GetQuestionWeightsDTO> createQuestionWeights(@Valid @RequestBody CreateQuestionWeightsDTO createQuestionWeightsDTO) {
+    public ResponseEntity<GetQuestionWeightsDTO> createQuestionWeights(@RequestBody CreateQuestionWeightsDTO createQuestionWeightsDTO) {
         return new ResponseEntity<>(questionWeightsService.createQuestionWeights(createQuestionWeightsDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{questionsId}")
-    public ResponseEntity<GetQuestionWeightsDTO> updateQuestionWeights(@PathVariable Long questionsId, @Valid @RequestBody UpdateQuestionWeightsDTO updateQuestionWeightsDTO) {
+    public ResponseEntity<GetQuestionWeightsDTO> updateQuestionWeights(@PathVariable Long questionsId, @RequestBody UpdateQuestionWeightsDTO updateQuestionWeightsDTO) {
 
         GetQuestionWeightsDTO updated = questionWeightsService.updateQuestionWeights(questionsId, updateQuestionWeightsDTO);
         return new ResponseEntity<>(updated, HttpStatus.OK);

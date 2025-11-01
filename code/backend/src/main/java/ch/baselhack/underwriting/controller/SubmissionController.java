@@ -4,7 +4,6 @@ import ch.baselhack.underwriting.dto.submissions.CreateSubmissionDTO;
 import ch.baselhack.underwriting.dto.submissions.GetSubmissionDTO;
 import ch.baselhack.underwriting.service.SubmissionService;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ public class SubmissionController {
     }
 
     @PostMapping
-    public ResponseEntity<List<GetSubmissionDTO>> createSubmission(@Valid @RequestBody List<CreateSubmissionDTO> createSubmissionDTO) {
+    public ResponseEntity<List<GetSubmissionDTO>> createSubmission(@RequestBody List<CreateSubmissionDTO> createSubmissionDTO) {
         return ResponseEntity.ok(submissionService.createSubmission(createSubmissionDTO));
     }
 }

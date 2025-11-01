@@ -22,7 +22,10 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @GetMapping
-    public ResponseEntity<List<GetQuestionDTO>> getQuestions() {
+    public ResponseEntity<List<GetQuestionDTO>> getQuestions(@RequestParam(required = false) Long offeringId) {
+        if (offeringId != null) {
+            return new ResponseEntity<>(questionService.getQuestionsByOfferingId(offeringId), HttpStatus.OK);
+        }
         return new ResponseEntity<>(questionService.getQuestions(), HttpStatus.OK);
     }
 
@@ -34,5 +37,16 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity<GetQuestionDTO> createQuestion(@Valid @RequestBody CreateQuestionDTO question) {
         return new ResponseEntity<>(questionService.createQuestion(question), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<GetQuestionDTO> updateQuestion(@PathVariable Long id, @Valid @RequestBody UpdateQuestionDTO question) {
+        return new ResponseEntity<>(questionService.updateQuestion(id, question), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
+        questionService.deleteQuestion(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

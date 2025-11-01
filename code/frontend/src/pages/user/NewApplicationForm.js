@@ -10,6 +10,7 @@ import {
   questionApi,
   clientApi,
   submissionApi,
+  applicationApi,
 } from '../../services/api';
 import { SwissCantons, GenderOptions, QuestionType, SubmissionValueType } from '../../constants/types';
 import './ApplicationForm.css';
@@ -69,15 +70,12 @@ const NewApplicationForm = () => {
   const fetchQuestions = async (offeringId) => {
     setQuestionsLoading(true);
     try {
-      const response = await questionApi.getAllQuestions();
-      const offeringQuestions = response.data.filter(
-        (q) => q.offering.id === offeringId
-      );
-      setQuestions(offeringQuestions);
+      const response = await questionApi.getQuestionsByOfferingId(offeringId);
+      setQuestions(response.data);
 
       // Initialize answers object
       const initialAnswers = {};
-      offeringQuestions.forEach((q) => {
+      response.data.forEach((q) => {
         initialAnswers[q.id] = '';
       });
       setAnswers(initialAnswers);
@@ -149,16 +147,24 @@ const NewApplicationForm = () => {
       });
       const clientId = clientResponse.data.id;
 
-      // Step 2: Prepare submissions
+      // Step 2: Create the application
+      const applicationResponse = await applicationApi.createApplication({
+        clientId: clientId,
+        offeringId: selectedOffering.id,
+      });
+      const applicationId = applicationResponse.data.id;
+
+      // Step 3: Prepare submissions
       const submissions = questions.map((question) => ({
+        applicationId: applicationId,
         clientId: clientId,
         questionId: question.id,
-        value: answers[question.id] || '',
+        value: String(answers[question.id] || ''),
         type: mapQuestionTypeToSubmissionType(question.type),
       }));
 
-      // Step 3: Create all submissions
-      await submissionApi.createSubmission(submissions);
+      // Step 4: Create all submissions
+      await submissionApi.createSubmissions(submissions);
 
       // Navigate to success page
       navigate('/user/success');

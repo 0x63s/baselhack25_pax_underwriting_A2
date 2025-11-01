@@ -1,36 +1,36 @@
 -- Initial Client Data
-INSERT INTO client (first_name, last_name, address, city, canton, birth_date, gender, email, phone_number, zip)
+INSERT INTO client (first_name, last_name, address, city, canton, birth_date, email, phone_number, zip)
 VALUES
-('Gabriel', 'Keller', 'Poststrasse 29', 'Zürich', 'ZH', '1956-12-03', 'male', 'gabriel.keller@proton.me', '+41 076 030 11 27', 8005),
-('Elia', 'Schwarz', 'Feldstrasse 29', 'Neuchâtel', 'NE', '2005-04-08', 'female', 'elia.schwarz@outlook.com', '+41 078 284 19 27', 2008),
-('Noah', 'Fischer', 'Seestrasse 119', 'Lausanne', 'VD', '1973-05-28', 'male', 'noah.fischer@outlook.com', '+41 076 046 84 29', 1011),
-('Matteo', 'Schwarz', 'Hauptstrasse 48', 'Aarau', 'AG', '1999-06-12', 'male', 'matteo.schwarz@bluewin.ch', '+41 077 167 59 48', 5005),
-('Paul', 'Meier', 'Feldstrasse 35', 'Schaffhausen', 'SH', '1977-08-14', 'male', 'paul.meier@gmail.com', '+41 079 905 82 58', 8205),
-('Sara', 'Frei', 'Feldstrasse 115', 'Fribourg', 'FR', '1993-06-10', 'female', 'sara.frei@gmx.ch', '+41 076 881 14 19', 1709),
-('Zoé', 'Fontana', 'Gartenweg 111', 'Montreux', 'VD', '1957-09-04', 'male', 'zoé.fontana@gmail.com', '+41 078 114 37 55', 1824),
-('Laura', 'Keller', 'Lindenweg 82', 'Olten', 'SO', '1972-04-21', 'female', 'laura.keller@gmx.ch', '+41 076 613 41 62', 4604),
-('Julia', 'Hofmann', 'Seestrasse 94', 'Herisau', 'AR', '1958-01-22', 'female', 'julia.hofmann@outlook.com', '+41 079 969 70 21', 9101),
-('Sofia', 'Bianchi', 'Panoramastrasse 116', 'Bellinzona', 'TI', '1985-09-10', 'female', 'sofia.bianchi@gmx.ch', '+41 077 602 28 00', 6505),
-('Julia', 'Meier', 'Seestrasse 66', 'Olten', 'SO', '1986-08-18', 'female', 'julia.meier@proton.me', '+41 079 248 60 52', 4605),
-('Marie', 'Fischer', 'Bahnhofstrasse 52', 'Winterthur', 'ZH', '1996-01-18', 'female', 'marie.fischer@posteo.net', '+41 079 143 54 23', 8401),
-('Marie', 'Graf', 'Bahnhofstrasse 84', 'St. Gallen', 'SG', '1984-08-23', 'female', 'marie.graf@gmx.ch', '+41 079 218 51 07', 9001),
-('Elia', 'Fischer', 'Rathausgasse 92', 'Schaffhausen', 'SH', '1986-04-27', 'female', 'elia.fischer@outlook.com', '+41 076 765 40 07', 8208),
-('Emma', 'Schmid', 'Rathausgasse 111', 'Chur', 'GR', '1983-10-06', 'female', 'emma.schmid@proton.me', '+41 076 429 84 74', 7001),
-('Jonas', 'Brunner', 'Hauptstrasse 86', 'Luzern', 'LU', '1999-05-05', 'male', 'jonas.brunner@posteo.net', '+41 076 075 68 27', 6009),
-('Julia', 'Brunner', 'Hauptstrasse 57', 'Baar', 'ZG', '1958-05-25', 'female', 'julia.brunner@gmx.ch', '+41 078 954 84 13', 6344),
-('Elena', 'Meißner', 'Rathausgasse 82', 'Zug', 'ZG', '2001-04-17', 'female', 'elena.meißner@bluewin.ch', '+41 078 045 00 42', 6303),
-('Matteo', 'Zimmermann', 'Gartenweg 2', 'Neuchâtel', 'NE', '1992-06-23', 'female', 'matteo.zimmermann@gmail.com', '+41 078 596 70 18', 2006),
-('Laura', 'Gerber', 'Alpenblick 46', 'Olten', 'SO', '1996-08-17', 'female', 'laura.gerber@proton.me', '+41 079 997 79 95', 4600),
-('Giulia', 'Gerber', 'Bahnhofstrasse 23', 'Biel/Bienne', 'BE', '1968-11-29', 'female', 'giulia.gerber@posteo.net', '+41 077 273 20 89', 2508),
-('Lina', 'Fischer', 'Kirchweg 40', 'Aarau', 'AG', '1988-07-10', 'female', 'lina.fischer@proton.me', '+41 076 990 98 35', 5007),
-('Nina', 'Huber', 'Bahnhofstrasse 14', 'Rapperswil-Jona', 'SG', '1977-09-16', 'female', 'nina.huber@gmx.ch', '+41 076 394 73 24', 8644),
-('David', 'Schäfer', 'Kirchweg 85', 'Zug', 'ZG', '1969-03-18', 'female', 'david.schäfer@gmail.com', '+41 078 567 16 24', 6309),
-('Paul', 'Müller', 'Poststrasse 56', 'Kriens', 'LU', '1964-02-19', 'female', 'paul.müller@gmx.ch', '+41 077 523 60 94', 6014),
-('Gabriel', 'Meister', 'Lindenweg 97', 'Zug', 'ZG', '1987-12-26', 'female', 'gabriel.meister@proton.me', '+41 077 486 78 98', 6301),
-('Lina', 'Weber', 'Alpenblick 97', 'Lugano', 'TI', '1959-05-20', 'female', 'lina.weber@gmail.com', '+41 077 939 15 58', 6900),
-('Laura', 'Zimmermann', 'Schulstrasse 111', 'Lausanne', 'VD', '1983-09-02', 'female', 'laura.zimmermann@outlook.com', '+41 079 641 30 35', 1005),
-('Jonas', 'Wyss', 'Seestrasse 18', 'Stans', 'NW', '1992-02-21', 'female', 'jonas.wyss@proton.me', '+41 079 417 42 69', 6378),
-('Leon', 'Suter', 'Schulstrasse 3', 'Sion', 'VS', '1974-04-17', 'female', 'leon.suter@gmx.ch', '+41 079 551 95 94', 1959);
+('Gabriel', 'Keller', 'Poststrasse 29', 'Zürich', 'ZH', '1956-12-03', 'gabriel.keller@proton.me', '+41 076 030 11 27', 8005),
+('Elia', 'Schwarz', 'Feldstrasse 29', 'Neuchâtel', 'NE', '2005-04-08', 'elia.schwarz@outlook.com', '+41 078 284 19 27', 2008),
+('Noah', 'Fischer', 'Seestrasse 119', 'Lausanne', 'VD', '1973-05-28', 'noah.fischer@outlook.com', '+41 076 046 84 29', 1011),
+('Matteo', 'Schwarz', 'Hauptstrasse 48', 'Aarau', 'AG', '1999-06-12', 'matteo.schwarz@bluewin.ch', '+41 077 167 59 48', 5005),
+('Paul', 'Meier', 'Feldstrasse 35', 'Schaffhausen', 'SH', '1977-08-14', 'paul.meier@gmail.com', '+41 079 905 82 58', 8205),
+('Sara', 'Frei', 'Feldstrasse 115', 'Fribourg', 'FR', '1993-06-10', 'sara.frei@gmx.ch', '+41 076 881 14 19', 1709),
+('Zoé', 'Fontana', 'Gartenweg 111', 'Montreux', 'VD', '1957-09-04', 'zoé.fontana@gmail.com', '+41 078 114 37 55', 1824),
+('Laura', 'Keller', 'Lindenweg 82', 'Olten', 'SO', '1972-04-21', 'laura.keller@gmx.ch', '+41 076 613 41 62', 4604),
+('Julia', 'Hofmann', 'Seestrasse 94', 'Herisau', 'AR', '1958-01-22', 'julia.hofmann@outlook.com', '+41 079 969 70 21', 9101),
+('Sofia', 'Bianchi', 'Panoramastrasse 116', 'Bellinzona', 'TI', '1985-09-10', 'sofia.bianchi@gmx.ch', '+41 077 602 28 00', 6505),
+('Julia', 'Meier', 'Seestrasse 66', 'Olten', 'SO', '1986-08-18', 'julia.meier@proton.me', '+41 079 248 60 52', 4605),
+('Marie', 'Fischer', 'Bahnhofstrasse 52', 'Winterthur', 'ZH', '1996-01-18', 'marie.fischer@posteo.net', '+41 079 143 54 23', 8401),
+('Marie', 'Graf', 'Bahnhofstrasse 84', 'St. Gallen', 'SG', '1984-08-23', 'marie.graf@gmx.ch', '+41 079 218 51 07', 9001),
+('Elia', 'Fischer', 'Rathausgasse 92', 'Schaffhausen', 'SH', '1986-04-27', 'elia.fischer@outlook.com', '+41 076 765 40 07', 8208),
+('Emma', 'Schmid', 'Rathausgasse 111', 'Chur', 'GR', '1983-10-06', 'emma.schmid@proton.me', '+41 076 429 84 74', 7001),
+('Jonas', 'Brunner', 'Hauptstrasse 86', 'Luzern', 'LU', '1999-05-05', 'jonas.brunner@posteo.net', '+41 076 075 68 27', 6009),
+('Julia', 'Brunner', 'Hauptstrasse 57', 'Baar', 'ZG', '1958-05-25', 'julia.brunner@gmx.ch', '+41 078 954 84 13', 6344),
+('Elena', 'Meißner', 'Rathausgasse 82', 'Zug', 'ZG', '2001-04-17', 'elena.meißner@bluewin.ch', '+41 078 045 00 42', 6303),
+('Matteo', 'Zimmermann', 'Gartenweg 2', 'Neuchâtel', 'NE', '1992-06-23', 'matteo.zimmermann@gmail.com', '+41 078 596 70 18', 2006),
+('Laura', 'Gerber', 'Alpenblick 46', 'Olten', 'SO', '1996-08-17', 'laura.gerber@proton.me', '+41 079 997 79 95', 4600),
+('Giulia', 'Gerber', 'Bahnhofstrasse 23', 'Biel/Bienne', 'BE', '1968-11-29', 'giulia.gerber@posteo.net', '+41 077 273 20 89', 2508),
+('Lina', 'Fischer', 'Kirchweg 40', 'Aarau', 'AG', '1988-07-10', 'lina.fischer@proton.me', '+41 076 990 98 35', 5007),
+('Nina', 'Huber', 'Bahnhofstrasse 14', 'Rapperswil-Jona', 'SG', '1977-09-16', 'nina.huber@gmx.ch', '+41 076 394 73 24', 8644),
+('David', 'Schäfer', 'Kirchweg 85', 'Zug', 'ZG', '1969-03-18', 'david.schäfer@gmail.com', '+41 078 567 16 24', 6309),
+('Paul', 'Müller', 'Poststrasse 56', 'Kriens', 'LU', '1964-02-19', 'paul.müller@gmx.ch', '+41 077 523 60 94', 6014),
+('Gabriel', 'Meister', 'Lindenweg 97', 'Zug', 'ZG', '1987-12-26', 'gabriel.meister@proton.me', '+41 077 486 78 98', 6301),
+('Lina', 'Weber', 'Alpenblick 97', 'Lugano', 'TI', '1959-05-20', 'lina.weber@gmail.com', '+41 077 939 15 58', 6900),
+('Laura', 'Zimmermann', 'Schulstrasse 111', 'Lausanne', 'VD', '1983-09-02', 'laura.zimmermann@outlook.com', '+41 079 641 30 35', 1005),
+('Jonas', 'Wyss', 'Seestrasse 18', 'Stans', 'NW', '1992-02-21', 'jonas.wyss@proton.me', '+41 079 417 42 69', 6378),
+('Leon', 'Suter', 'Schulstrasse 3', 'Sion', 'VS', '1974-04-17', 'leon.suter@gmx.ch', '+41 079 551 95 94', 1959);
 
 
 -- Create Offering first
@@ -47,6 +47,18 @@ INSERT INTO question (offering_id, title, description, type, type_options) VALUE
 (1, 'Annual Income', 'What is your annual income?', 'NUMBER', NULL),
 (1, 'Age', 'What is your age?', 'NUMBER', NULL),
 (1, 'Sport Activities', 'What sport activities do you participate in? (select all that apply)', 'TAGS', 'cycling,running,hiking,tennis,gym,dancing,skiing,pilates,swimming,yoga,climbing,boxing,other');
+
+
+INSERT INTO question_weights (parameter_weight, question_id, weights) VALUES
+(0.9, 7, '-,17:0.6;18,30:0.1;31,50:0.2;51,67:0.5;68,|:0.8'),
+(0.3, 1, '-,149:0.4;150,165:0.1;166,185:0.1;186,|:0.5'),
+(0.7, 2, '-,49:0.5;50,65:0.1;66,85:0.2;86,110:0.6;111,|:0.9'),
+(0.5, 6, '-,29999:0.7;30000,80000:0.2;80001,120000:0.1;120001,|:0.1'),
+(0.22, 4, 'none:1;stress:0.95;insomnia:0.9;gastritis:0.85;back pain:0.8;anxiety:0.75;high cholesterol:0.65;hypertension:0.55;asthma:0.5;arthritis:0.45;diabetes:0.3;heart disease:0.2;other:0.6'),
+(0.18, 5, 'sedentary/office:0.6;manual labor:0.7;healthcare:0.4;emergency services:0.8;unemployed:0.5;other:0.3'),
+(0.35, 3, 'non-smoker:0.1;former smoker (> 5 yrs):0.3;former smoker (< 5 yrs):0.6;current (1-10/day):0.8;current (10+/day):1.0;vapes only:0.5'),
+(0.1, 8, 'running:0.1;swimming:0.1;cycling:0.1;yoga:0.05;team sports:0.2;extreme sports:0.7;none:0.5');
+
 
 
 -- User Submissions

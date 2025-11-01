@@ -5,16 +5,17 @@ import Button from '../../components/common/Button';
 import Table from '../../components/common/Table';
 import Modal from '../../components/common/Modal';
 import Loading from '../../components/common/Loading';
-import { clientApi, submissionApi } from '../../services/api';
+import { clientApi, applicationApi } from '../../services/api';
 import './Clients.css';
 
 const Clients = () => {
   const navigate = useNavigate();
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showSubmissionsModal, setShowSubmissionsModal] = useState(false);
+  const [showApplicationsModal, setShowApplicationsModal] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
-  const [submissions, setSubmissions] = useState([]);
+  const [applications, setApplications] = useState([]);
+  const [loadingApplications, setLoadingApplications] = useState(false);
 
   useEffect(() => {
     loadClients();
@@ -32,15 +33,25 @@ const Clients = () => {
     }
   };
 
-  const handleViewSubmissions = async (client) => {
+  const handleViewApplications = async (client) => {
     setSelectedClient(client);
+    setLoadingApplications(true);
     try {
-      const response = await submissionApi.getSubmissionsByClient(client.id);
-      setSubmissions(response.data);
-      setShowSubmissionsModal(true);
+      // Get all applications and filter by client ID
+      const allAppsResponse = await applicationApi.getAllApplications();
+      const clientApps = allAppsResponse.data.filter(app => app.client.id === client.id);
+      setApplications(clientApps);
+      setShowApplicationsModal(true);
     } catch (error) {
-      console.error('Error loading submissions:', error);
-      alert('Failed to load submissions');
+      console.error('Error loading applications:', error);
+      if (error.response?.status === 404) {
+        setApplications([]);
+        setShowApplicationsModal(true);
+      } else {
+        alert('Failed to load applications');
+      }
+    } finally {
+      setLoadingApplications(false);
     }
   };
 
@@ -64,22 +75,58 @@ const Clients = () => {
       key: 'actions',
       label: 'Actions',
       render: (_, row) => (
-        <Button size="small" onClick={() => handleViewSubmissions(row)}>
-          View Submissions
+        <Button size="small" onClick={() => handleViewApplications(row)}>
+          View Applications
         </Button>
       ),
     },
   ];
 
-  const submissionColumns = [
-    { key: 'id', label: 'ID' },
+  const applicationColumns = [
+    { key: 'id', label: 'Application ID' },
     {
-      key: 'question',
-      label: 'Question',
-      render: (question) => question?.title || 'N/A',
+      key: 'offering',
+      label: 'Offering',
+      render: (offering) => offering?.name || 'N/A',
     },
-    { key: 'value', label: 'Answer' },
-    { key: 'type', label: 'Type' },
+    {
+      key: 'createdAt',
+      label: 'Submitted',
+      render: (date) => new Date(date).toLocaleDateString(),
+    },
+    {
+      key: 'isReviewed',
+      label: 'Status',
+      render: (isReviewed) => (
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          backgroundColor: isReviewed ? '#10b981' : '#f59e0b',
+          color: 'white',
+          fontSize: '0.85rem'
+        }}>
+          {isReviewed ? 'Reviewed' : 'Pending'}
+        </span>
+      ),
+    },
+    {
+      key: 'riskCategory',
+      label: 'Risk Category',
+      render: (category) => category ? category.replace(/_/g, ' ') : 'Not assessed',
+    },
+    {
+      key: 'actions',
+      label: 'Actions',
+      render: (_, row) => (
+        <Button
+          size="small"
+          variant="secondary"
+          onClick={() => navigate(`/admin/applications?id=${row.id}`)}
+        >
+          View Details
+        </Button>
+      ),
+    },
   ];
 
   if (loading) return <Loading />;
@@ -100,15 +147,17 @@ const Clients = () => {
       </Card>
 
       <Modal
-        isOpen={showSubmissionsModal}
-        onClose={() => setShowSubmissionsModal(false)}
-        title={`Submissions for ${selectedClient?.firstName} ${selectedClient?.lastName}`}
+        isOpen={showApplicationsModal}
+        onClose={() => setShowApplicationsModal(false)}
+        title={`Applications for ${selectedClient?.firstName} ${selectedClient?.lastName}`}
         size="large"
       >
-        {submissions.length === 0 ? (
-          <p className="no-submissions">No submissions found for this client</p>
+        {loadingApplications ? (
+          <Loading />
+        ) : applications.length === 0 ? (
+          <p className="no-submissions">No applications found for this client</p>
         ) : (
-          <Table columns={submissionColumns} data={submissions} />
+          <Table columns={applicationColumns} data={applications} />
         )}
       </Modal>
     </div>

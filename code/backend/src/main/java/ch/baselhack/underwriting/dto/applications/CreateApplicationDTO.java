@@ -1,4 +1,4 @@
-package ch.baselhack.underwriting.dto.questions;
+package ch.baselhack.underwriting.dto.applications;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,12 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateQuestionWeightsDTO {
+public class CreateApplicationDTO {
     @NotNull
-    private Long questionId;
+    private Long clientId;
 
     @NotNull
-    private String weights;
-
-    private double parameterWeight;
+    private Long offeringId;
 }

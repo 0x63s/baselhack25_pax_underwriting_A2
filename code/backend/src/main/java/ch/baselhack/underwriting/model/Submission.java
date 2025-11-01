@@ -15,6 +15,11 @@ public class Submission {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "application_id")
+    private Application application;
+
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "client_id")
     Client client;
 

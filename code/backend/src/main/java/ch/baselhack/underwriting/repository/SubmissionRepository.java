@@ -11,4 +11,6 @@ public interface SubmissionRepository extends JpaRepository<Submission, Long> {
     List<Submission> findAllByClientId(Long clientId);
 
     boolean existsByClientIdAndQuestionId(Long clientId, Long questionId);
+
+    boolean existsByApplicationIdAndQuestionId(Long applicationId, Long questionId);
 }

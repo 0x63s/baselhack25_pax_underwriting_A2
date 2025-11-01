@@ -1,5 +1,8 @@
 package ch.baselhack.underwriting.dto.questions;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class UpdateQuestionWeightsDTO {
     private Long id;
 
-    @NotNull
     private String weights;
+
+    private double parameterWeight;
 }

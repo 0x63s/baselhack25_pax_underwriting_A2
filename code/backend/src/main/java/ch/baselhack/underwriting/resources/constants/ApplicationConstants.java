@@ -11,4 +11,5 @@ public class ApplicationConstants {
     public static final String QUESTIONS_API = API_V1 + "/questions";
     public static final String QUESTION_WEIGHTS_API = API_V1 + "/question-weights";
     public static final String SUBMISSION_API = API_V1 + "/submissions";
+    public static final String APPLICATIONS_API = API_V1 + "/applications";
 }
