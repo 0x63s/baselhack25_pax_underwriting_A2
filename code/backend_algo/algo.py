@@ -33,20 +33,18 @@ user_data_sample = {
 
 decision_thresholds =  {
     "accept": 40,
-    "accept_with_rise": 65,
     "ask_for_info_addon": 10,
     "reject_cutoff": 81
 }
 
 def evaluate_bins(bins, user_value, scores):
     for i, bin_ in enumerate(bins):
-        print(bin_, scores[i])
         if bin_[0] <= user_value <= bin_[1]:
             return scores[i]
     return 0
 
-def evalueate_categories(categories, scores):
-    i = categories.index(1)
+def evaluate_categories(categories, user_value, scores):
+    i = categories.index(user_value)
     return scores[i]
 
 
@@ -65,7 +63,9 @@ def get_score_for_user_input(data, user_input):
             score = evaluate_bins(bins, user_value, scores)
         else:
             categories = data[key]["categories"]
-            score = evaluate_bins(categories, user_value, scores)
+            score = evaluate_categories(categories, user_value, scores)
+
+        print(score, key)
 
         total_score += score
 
@@ -84,5 +84,6 @@ def get_result_based_on_score(score):
 
 
 if __name__ == "__main__":
-    print(get_score_for_user_input(user_input=user_data_sample, data=data_sample))
-    print(get_result_based_on_score(50))
+    score_ = get_score_for_user_input(user_input=user_data_sample, data=data_sample)
+    print(score_)
+    print(get_result_based_on_score(score_))
