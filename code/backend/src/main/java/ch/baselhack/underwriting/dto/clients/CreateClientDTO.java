@@ -1,20 +1,14 @@
-package ch.baselhack.underwriting.model;
+package ch.baselhack.underwriting.dto.clients;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.Date;
-import java.util.UUID;
+import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@Table(name="client")
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateClientDTO {
     @NotNull(message = "First name must not be empty")
     private String firstName;
 
@@ -30,8 +24,8 @@ public class Client {
     @NotNull(message = "Canton must not be empty")
     private String canton;
 
-    @NotNull(message = "Birth date must not be empty")
-    private Date birthDate;
+    //@NotNull(message = "Birth date must not be empty")
+    //private Date birthDate;
 
     @NotNull(message = "Email must not be empty")
     private String email;

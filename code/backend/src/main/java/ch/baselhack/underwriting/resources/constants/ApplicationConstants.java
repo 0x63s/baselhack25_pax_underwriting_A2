@@ -7,4 +7,5 @@ import lombok.AllArgsConstructor;
 public class ApplicationConstants {
     public static final String API_V1 = "/api/v1";
     public static final String OFFERINGS_API = API_V1 + "/offerings";
+    public static final String CLIENTS_API = API_V1 + "/clients";
 }
