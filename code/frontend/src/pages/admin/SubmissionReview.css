@@ -1,0 +1,241 @@
+.submission-review-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  margin: 12px 0 8px 0;
+  color: #2c3e50;
+  font-size: 28px;
+}
+
+.page-header .subtitle {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.no-data {
+  text-align: center;
+  color: #95a5a6;
+  font-style: italic;
+  padding: 40px 20px;
+  font-size: 16px;
+}
+
+/* Review Modal */
+.review-modal-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.review-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.review-section:last-child {
+  border-bottom: none;
+}
+
+.review-section h3 {
+  margin: 0 0 16px 0;
+  color: #2c3e50;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.review-section h4 {
+  margin: 12px 0 8px 0;
+  color: #34495e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Personal Information */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.info-item {
+  padding: 8px 0;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.info-item strong {
+  color: #34495e;
+  margin-right: 6px;
+}
+
+/* Offering Information */
+.offering-info {
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.offering-info strong {
+  color: #2c3e50;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.offering-info p {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Questionnaire Answers */
+.answers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.answer-item {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #3498db;
+}
+
+.question-title {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.answer-value {
+  color: #34495e;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.answer-weight {
+  font-size: 13px;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+/* Risk Assessment */
+.risk-assessment {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.risk-score {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.risk-score strong {
+  color: #2c3e50;
+}
+
+.risk-score .score {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.risk-score .score.low {
+  background: #d4edda;
+  color: #27ae60;
+}
+
+.risk-score .score.medium {
+  background: #fff3cd;
+  color: #f39c12;
+}
+
+.risk-score .score.high {
+  background: #f8d7da;
+  color: #e74c3c;
+}
+
+.weight-breakdown {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 12px;
+}
+
+.weight-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #34495e;
+}
+
+.weight-value {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* AI Analysis */
+.ai-analysis {
+  background: #e8f4f8;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.ai-recommendation,
+.ai-confidence,
+.ai-findings {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.ai-recommendation strong,
+.ai-confidence strong,
+.ai-findings strong {
+  color: #2c3e50;
+  margin-right: 8px;
+}
+
+.ai-recommendation {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}

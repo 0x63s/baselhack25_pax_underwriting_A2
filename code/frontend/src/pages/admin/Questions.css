@@ -1,0 +1,58 @@
+.questions-page {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.filter-info {
+  margin: 8px 0 0 0;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.weights-section {
+  padding: 10px 0;
+}
+
+.weights-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.no-weights {
+  color: #95a5a6;
+  font-style: italic;
+  margin: 20px 0;
+}
+
+.weights-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.weights-table th {
+  background: #f8f9fa;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+}
+
+.weights-table td {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.add-weight-title {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.add-weight-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

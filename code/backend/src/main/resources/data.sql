@@ -115,3 +115,43 @@ INSERT INTO submission (client_id, question_id, value, type) VALUES
 (6, 6, '79988', 'NUMBER'),
 (6, 7, '66', 'NUMBER'),
 (6, 8, 'cycling; pilates', 'TEXT');
+
+
+-- Question Weights (each row is one value-score pair)
+
+-- Smoking Status weights (question 3)
+INSERT INTO question_weights (question_id, offering_id, value_question, score_question) VALUES
+(3, 1, 'Yes', 15.0),
+(3, 1, 'No', 0.0);
+
+-- Medical Conditions weights (question 4)
+INSERT INTO question_weights (question_id, offering_id, value_question, score_question) VALUES
+(4, 1, 'none', 0.0),
+(4, 1, 'anxiety', 3.0),
+(4, 1, 'insomnia', 2.0),
+(4, 1, 'gastritis', 4.0),
+(4, 1, 'stress', 3.0),
+(4, 1, 'heart disease', 20.0),
+(4, 1, 'back pain', 5.0),
+(4, 1, 'high cholesterol', 8.0),
+(4, 1, 'arthritis', 7.0),
+(4, 1, 'diabetes', 12.0),
+(4, 1, 'asthma', 6.0),
+(4, 1, 'hypertension', 10.0),
+(4, 1, 'other', 5.0);
+
+-- Sport Activities weights (question 8) - negative scores reduce risk
+INSERT INTO question_weights (question_id, offering_id, value_question, score_question) VALUES
+(8, 1, 'cycling', -2.0),
+(8, 1, 'running', -3.0),
+(8, 1, 'hiking', -2.0),
+(8, 1, 'tennis', -2.0),
+(8, 1, 'gym', -3.0),
+(8, 1, 'dancing', -1.0),
+(8, 1, 'skiing', -2.0),
+(8, 1, 'pilates', -1.0),
+(8, 1, 'swimming', -3.0),
+(8, 1, 'yoga', -1.0),
+(8, 1, 'climbing', -4.0),
+(8, 1, 'boxing', -5.0),
+(8, 1, 'other', 0.0);

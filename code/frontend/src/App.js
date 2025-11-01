@@ -1,72 +1,43 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import axios from "axios";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './App.css';
+
+// Admin Pages
+import AdminDashboard from './pages/admin/AdminDashboard';
+import Offerings from './pages/admin/Offerings';
+import CreateOffering from './pages/admin/CreateOffering';
+import Questions from './pages/admin/Questions';
+import Clients from './pages/admin/Clients';
+
+// User Pages
+import NewApplicationForm from './pages/user/NewApplicationForm';
+import SuccessPage from './pages/user/SuccessPage';
 
 function App() {
-  const [backendStatus, setBackendStatus] = useState("checking...");
-  const [aiStatus, setAiStatus] = useState("checking...");
-  const [algoStatus, setAlgoStatus] = useState("checking...");
-
-  useEffect(() => {
-    // Check backend health
-    axios
-      .get("/api/health")
-      .then(() => setBackendStatus("connected"))
-      .catch(() => setBackendStatus("disconnected"));
-
-    // Check AI backend health
-    axios
-      .get("http://localhost:8001/health")
-      .then(() => setAiStatus("connected"))
-      .catch(() => setAiStatus("disconnected"));
-
-    // Check Algo backend health
-    axios
-      .get("http://localhost:8002/health")
-      .then(() => setAlgoStatus("connected"))
-      .catch(() => setAlgoStatus("disconnected"));
-  }, []);
-
-  const navigateToUserPage = () => {
-    window.location.href = '/user_page.html';
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>PAX Underwriting Platform</h1>
-        <div className="status-container">
-          <div className="status-item">
-            <span>Backend: </span>
-            <span className={`status ${backendStatus}`}>{backendStatus}</span>
-          </div>
-          <div className="status-item">
-            <span>AI Service: </span>
-            <span className={`status ${aiStatus}`}>{aiStatus}</span>
-          </div>
-          <div className="status-item">
-            <span>Algo Service: </span>
-            <span className={`status ${algoStatus}`}>{algoStatus}</span>
-          </div>
-        </div>
-        <p>Welcome to the PAX Underwriting Application</p>
-        <button 
-          onClick={navigateToUserPage}
-          style={{
-            backgroundColor: '#3498db',
-            color: 'white',
-            border: 'none',
-            padding: '12px 20px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '16px',
-            marginTop: '20px'
-          }}
-        >
-          Enter Personal Information
-        </button>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* Redirect root to user home */}
+          <Route path="/" element={<Navigate to="/user" replace />} />
+
+          {/* User Routes */}
+          <Route path="/user" element={<NewApplicationForm />} />
+          <Route path="/user/success" element={<SuccessPage />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/offerings" element={<Offerings />} />
+          <Route path="/admin/offerings/new" element={<CreateOffering />} />
+          <Route path="/admin/questions" element={<Questions />} />
+          <Route path="/admin/clients" element={<Clients />} />
+          <Route path="/admin/submissions" element={<Clients />} />
+
+          {/* Fallback route */}
+          <Route path="*" element={<Navigate to="/user" replace />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
