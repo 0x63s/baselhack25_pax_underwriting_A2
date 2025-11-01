@@ -6,6 +6,7 @@ import ch.baselhack.underwriting.exception.offerings.OfferingNotFoundException;
 import ch.baselhack.underwriting.exception.questions.NoQuestionsFoundException;
 import ch.baselhack.underwriting.exception.questions.QuestionAlreadyExistsException;
 import ch.baselhack.underwriting.exception.questions.QuestionNotFoundException;
+import ch.baselhack.underwriting.model.Offering;
 import ch.baselhack.underwriting.model.Question;
 import ch.baselhack.underwriting.repository.OfferingRepository;
 import ch.baselhack.underwriting.repository.QuestionRepository;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +26,19 @@ public class QuestionServiceImpl implements QuestionService {
     private final OfferingRepository offeringRepository;
     private final ModelMapper modelMapper;
 
+    private Question updateQuestion(Question question, CreateQuestionDTO questionDto) {
+        question.setTitle(questionDto.getTitle());
+        question.setDescription(questionDto.getDescription());
+        question.setType(questionDto.getType());
+        question.setTypeOptions(questionDto.getTypeOptions());
+        question.setOffering(modelMapper.map(offeringRepository.findById(questionDto.getOffering_id()), Offering.class));
+
+        return question;
+    }
+
 
     @Override
-    public GetQuestionDTO getQuestion(UUID id) {
+    public GetQuestionDTO getQuestion(Long id) {
         if (!questionRepository.existsById(id)) {
             throw new QuestionNotFoundException(id);
         }
@@ -43,7 +53,8 @@ public class QuestionServiceImpl implements QuestionService {
         if (!offeringRepository.existsById(question.getOffering_id())) {
             throw new OfferingNotFoundException(question.getOffering_id());
         }
-        return modelMapper.map(questionRepository.save(modelMapper.map(question, Question.class)), GetQuestionDTO.class);
+
+        return modelMapper.map(questionRepository.save(updateQuestion(new Question(), question)), GetQuestionDTO.class);
     }
 
     @Override

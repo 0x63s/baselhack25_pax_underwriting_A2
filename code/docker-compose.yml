@@ -1,22 +1,21 @@
-version: '3.8'
-
 services:
-  # PostgreSQL Database
-  postgres:
-    image: postgres:16-alpine
-    container_name: pax-postgres
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: pax-mysql
     environment:
-      POSTGRES_DB: underwriting
-      POSTGRES_USER: pax_user
-      POSTGRES_PASSWORD: pax_password
+      MYSQL_DATABASE: underwriting
+      MYSQL_USER: pax_user
+      MYSQL_PASSWORD: pax_password
+      MYSQL_ROOT_PASSWORD: root_password
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     networks:
       - pax-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pax_user -d underwriting"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "pax_user", "-ppax_password"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -31,12 +30,12 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/underwriting
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/underwriting
       SPRING_DATASOURCE_USERNAME: pax_user
       SPRING_DATASOURCE_PASSWORD: pax_password
       AI_SERVICE_URL: http://backend-ai:8001
     depends_on:
-      postgres:
+      mysql:
         condition: service_healthy
     networks:
       - pax-network
@@ -122,7 +121,7 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
+  mysql_data:
     driver: local
   ai_models:
     driver: local

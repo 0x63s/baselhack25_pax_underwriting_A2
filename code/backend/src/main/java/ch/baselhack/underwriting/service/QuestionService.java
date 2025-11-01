@@ -4,10 +4,9 @@ import ch.baselhack.underwriting.dto.questions.CreateQuestionDTO;
 import ch.baselhack.underwriting.dto.questions.GetQuestionDTO;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface QuestionService {
-    GetQuestionDTO getQuestion(UUID id);
+    GetQuestionDTO getQuestion(Long id);
 
     GetQuestionDTO createQuestion(CreateQuestionDTO getQuestionDTO);
 

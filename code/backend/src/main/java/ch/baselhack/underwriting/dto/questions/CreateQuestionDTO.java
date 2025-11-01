@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +16,7 @@ public class CreateQuestionDTO {
     private String title;
 
     @NotNull
-    private UUID offering_id;
+    private Long offering_id;
 
     private String description;
 

@@ -5,15 +5,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Entity
 @Table(name="client")
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull(message = "First name must not be empty")
     private String firstName;
@@ -39,19 +38,15 @@ public class Client {
     @NotNull(message = "Phone number must not be empty")
     private String phoneNumber;
 
-    @NotNull(message = "gender must not be empty")
     private String gender;
 
     @NotNull(message = "zip number must not be empty")
     private Number zip;
 
-    @NotNull(message = "height number must not be empty")
     private Number height;
 
-    @NotNull(message = "weight number must not be empty")
     private Number weight;
 
-    @NotNull(message = "is smoker must not be empty")
     private Boolean isSmoker;
 
     private String medicalConditions;

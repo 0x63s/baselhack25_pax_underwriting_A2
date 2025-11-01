@@ -6,13 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetQuestionDTO {
-    private UUID id;
+    private Long id;
+    private Offering offering;
     private String title;
     private String description;
     private QuestionType type;
