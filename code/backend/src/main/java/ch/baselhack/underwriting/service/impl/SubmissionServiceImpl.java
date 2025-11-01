@@ -9,9 +9,11 @@ import ch.baselhack.underwriting.exception.clients.ClientNotFoundExceptions;
 import ch.baselhack.underwriting.exception.submissions.SubmissionAlreadyExistsException;
 import ch.baselhack.underwriting.exception.submissions.SubmissionNotFoundException;
 import ch.baselhack.underwriting.exception.submissions.SubmissionsByClientNotFoundException;
+import ch.baselhack.underwriting.model.Application;
 import ch.baselhack.underwriting.model.Client;
 import ch.baselhack.underwriting.model.Question;
 import ch.baselhack.underwriting.model.Submission;
+import ch.baselhack.underwriting.repository.ApplicationRepository;
 import ch.baselhack.underwriting.repository.ClientRepository;
 import ch.baselhack.underwriting.repository.QuestionRepository;
 import ch.baselhack.underwriting.repository.SubmissionRepository;
@@ -33,6 +35,7 @@ public class SubmissionServiceImpl implements SubmissionService {
 
     private final QuestionRepository questionRepository;
     private final ClientRepository clientRepository;
+    private final ApplicationRepository applicationRepository;
     private final SubmissionRepository submissionRepository;
     private final ModelMapper modelMapper;
 
@@ -41,6 +44,7 @@ public class SubmissionServiceImpl implements SubmissionService {
         submission.setValue(createSubmissionDTO.getValue());
         submission.setQuestion(modelMapper.map(questionRepository.findById(createSubmissionDTO.getQuestionId()), Question.class));
         submission.setClient(modelMapper.map(clientRepository.findById(createSubmissionDTO.getClientId()), Client.class));
+        submission.setApplication(modelMapper.map(applicationRepository.findById(createSubmissionDTO.getApplicationId()), Application.class));
 
         return submission;
     }
@@ -73,7 +77,10 @@ public class SubmissionServiceImpl implements SubmissionService {
         List<GetSubmissionDTO> result = new ArrayList<>();
 
         submissionFields.forEach(createSubmissionDTO -> {
-            if (!submissionRepository.existsByClientIdAndQuestionId(createSubmissionDTO.getClientId(), createSubmissionDTO.getQuestionId())) {
+            // Check if submission already exists for this application and question
+            if (submissionRepository.existsByApplicationIdAndQuestionId(
+                    createSubmissionDTO.getApplicationId(),
+                    createSubmissionDTO.getQuestionId())) {
                 throw new SubmissionAlreadyExistsException();
             }
 

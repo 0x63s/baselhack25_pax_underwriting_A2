@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateSubmissionDTO {
     @NotNull
+    Long applicationId;
+
+    @NotNull
     Long clientId;
 
     @NotNull

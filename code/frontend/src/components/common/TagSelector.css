@@ -1,0 +1,86 @@
+.tag-selector-container {
+  margin-bottom: 20px;
+}
+
+.tag-selector-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.tag-selector-hint {
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.tag-selector-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.no-options {
+  color: #95a5a6;
+  font-style: italic;
+  margin: 0;
+}
+
+.tag-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.tag-option:hover {
+  border-color: #3498db;
+  background: #e8f4f8;
+  transform: translateY(-2px);
+}
+
+.tag-option.selected {
+  background: #3498db;
+  border-color: #3498db;
+  color: white;
+}
+
+.tag-option.selected:hover {
+  background: #2980b9;
+  border-color: #2980b9;
+}
+
+.checkmark {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.selected-tags-display {
+  margin-top: 12px;
+  padding: 12px;
+  background: #e8f4f8;
+  border-left: 3px solid #3498db;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.selected-tags-display strong {
+  color: #3498db;
+}
