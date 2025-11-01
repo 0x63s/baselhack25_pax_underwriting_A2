@@ -27,6 +27,10 @@ function App() {
       .catch(() => setAlgoStatus("disconnected"));
   }, []);
 
+  const navigateToUserPage = () => {
+    window.location.href = '/user_page.html';
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -46,6 +50,21 @@ function App() {
           </div>
         </div>
         <p>Welcome to the PAX Underwriting Application</p>
+        <button 
+          onClick={navigateToUserPage}
+          style={{
+            backgroundColor: '#3498db',
+            color: 'white',
+            border: 'none',
+            padding: '12px 20px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '16px',
+            marginTop: '20px'
+          }}
+        >
+          Enter Personal Information
+        </button>
       </header>
     </div>
   );
