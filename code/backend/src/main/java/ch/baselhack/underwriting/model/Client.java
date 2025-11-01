@@ -42,5 +42,5 @@ public class Client {
     private String gender;
 
     @NotNull(message = "zip number must not be empty")
-    private Number zip;
+    private Integer zip;
 }
