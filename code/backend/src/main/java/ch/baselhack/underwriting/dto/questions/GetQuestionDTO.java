@@ -13,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class GetQuestionDTO {
     private UUID id;
+    private Offering offering;
     private String title;
     private String description;
     private QuestionType type;

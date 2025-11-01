@@ -4,6 +4,7 @@ import ch.baselhack.underwriting.dto.questions.CreateQuestionDTO;
 import ch.baselhack.underwriting.dto.questions.GetQuestionDTO;
 import ch.baselhack.underwriting.repository.QuestionRepository;
 import ch.baselhack.underwriting.service.QuestionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity<GetQuestionDTO> createQuestion(@RequestBody CreateQuestionDTO question) {
+    public ResponseEntity<GetQuestionDTO> createQuestion(@Valid @RequestBody CreateQuestionDTO question) {
         return new ResponseEntity<>(questionService.createQuestion(question), HttpStatus.CREATED);
     }
 }
