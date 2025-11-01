@@ -1,0 +1,72 @@
+.user-home {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.user-home-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.user-home-header h1 {
+  margin: 0 0 12px 0;
+  color: #2c3e50;
+  font-size: 36px;
+}
+
+.user-home-header p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 18px;
+}
+
+.offerings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.offering-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.offering-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.offering-content {
+  text-align: center;
+}
+
+.offering-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.offering-name {
+  margin: 0 0 12px 0;
+  color: #2c3e50;
+  font-size: 22px;
+}
+
+.offering-description {
+  color: #7f8c8d;
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+  min-height: 50px;
+}
+
+.no-offerings {
+  text-align: center;
+  color: #95a5a6;
+  font-style: italic;
+  padding: 40px 20px;
+}
+
+.admin-link {
+  text-align: center;
+  margin-top: 40px;
+}

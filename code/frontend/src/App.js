@@ -14,34 +14,36 @@ import Clients from './pages/admin/Clients';
 import NewApplicationForm from './pages/user/NewApplicationForm';
 import SuccessPage from './pages/user/SuccessPage';
 
+// Admin Pages
+import AdminDashboard from './pages/admin/AdminDashboard';
+import Offerings from './pages/admin/Offerings';
+import CreateOffering from './pages/admin/CreateOffering';
+import Questions from './pages/admin/Questions';
+import Clients from './pages/admin/Clients';
+
+// User Pages
+import NewApplicationForm from './pages/user/NewApplicationForm';
+import SuccessPage from './pages/user/SuccessPage';
+
 function App() {
-  const [backendStatus, setBackendStatus] = useState("checking...");
-  const [aiStatus, setAiStatus] = useState("checking...");
-  const [algoStatus, setAlgoStatus] = useState("checking...");
+  return (
+    <Router>
+      <div className="App">
+        <Routes>
+          {/* Redirect root to user home */}
+          <Route path="/" element={<Navigate to="/user" replace />} />
 
-  useEffect(() => {
-    // Check backend health
-    axios
-      .get("/api/health")
-      .then(() => setBackendStatus("connected"))
-      .catch(() => setBackendStatus("disconnected"));
+          {/* User Routes */}
+          <Route path="/user" element={<NewApplicationForm />} />
+          <Route path="/user/success" element={<SuccessPage />} />
 
-    // Check AI backend health
-    axios
-      .get("http://localhost:8001/health")
-      .then(() => setAiStatus("connected"))
-      .catch(() => setAiStatus("disconnected"));
-
-    // Check Algo backend health
-    axios
-      .get("http://localhost:8002/health")
-      .then(() => setAlgoStatus("connected"))
-      .catch(() => setAlgoStatus("disconnected"));
-  }, []);
-
-  const navigateToUserPage = () => {
-    window.location.href = '/user_page.html';
-  };
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/offerings" element={<Offerings />} />
+          <Route path="/admin/offerings/new" element={<CreateOffering />} />
+          <Route path="/admin/questions" element={<Questions />} />
+          <Route path="/admin/clients" element={<Clients />} />
+          <Route path="/admin/submissions" element={<Clients />} />
 
   return (
     <Router>
