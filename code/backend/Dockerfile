@@ -15,6 +15,7 @@ RUN chmod +x mvnw
 # Normalize line endings (remove CRLF) so the script's shebang is valid inside the Linux image
 # This prevents "/bin/sh: 1: ./mvnw: not found" when mvnw has Windows CRLF endings.
 RUN sed -i 's/\r$//' mvnw || true
+RUN if [ -d .mvn ]; then find .mvn -type f -exec sed -i 's/\r$//' {} \; || true; fi
 
 # Download dependencies
 RUN ./mvnw dependency:go-offline -B

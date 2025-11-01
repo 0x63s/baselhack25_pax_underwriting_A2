@@ -1,0 +1,22 @@
+# Development image for hot-reload: does not build jar, runs mvnw spring-boot:run
+FROM eclipse-temurin:21-jdk
+
+WORKDIR /app
+
+# Copy wrappers so mvnw will work and download dependencies
+COPY .mvn .mvn
+COPY mvnw .
+COPY mvnw.cmd .
+COPY pom.xml .
+
+# Make mvnw executable
+RUN chmod +x mvnw || true
+RUN sed -i 's/\r$//' mvnw || true
+
+# Download dependencies so container startup is faster
+RUN ./mvnw dependency:go-offline -B || true
+
+EXPOSE 8080
+
+# Default command for dev: run spring-boot via mvnw. Compose file will mount project over /app so source changes are visible.
+CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.fork=false"]
