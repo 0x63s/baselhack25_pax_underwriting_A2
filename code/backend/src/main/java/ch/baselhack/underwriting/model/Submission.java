@@ -14,7 +14,7 @@ public class Submission {
     private Long id;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "client_id")
     Client client;
 

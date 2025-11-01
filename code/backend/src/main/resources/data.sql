@@ -31,3 +31,87 @@ VALUES
 ('Laura', 'Zimmermann', 'Schulstrasse 111', 'Lausanne', 'VD', '1983-09-02', 'female', 'laura.zimmermann@outlook.com', '+41 079 641 30 35', 1005),
 ('Jonas', 'Wyss', 'Seestrasse 18', 'Stans', 'NW', '1992-02-21', 'female', 'jonas.wyss@proton.me', '+41 079 417 42 69', 6378),
 ('Leon', 'Suter', 'Schulstrasse 3', 'Sion', 'VS', '1974-04-17', 'female', 'leon.suter@gmx.ch', '+41 079 551 95 94', 1959);
+
+
+-- Create Offering first
+INSERT INTO offering (id, name, description) VALUES
+(1, 'Life Insurance Application', 'Standard life insurance questionnaire for underwriting assessment');
+
+-- Questionnaire Data
+INSERT INTO question (offering_id, title, description, type, type_options) VALUES
+(1, 'Height', 'What is your height in cm?', 'NUMBER', NULL),
+(1, 'Weight', 'What is your weight in kg?', 'NUMBER', NULL),
+(1, 'Smoking Status', 'Are you a smoker?', 'RADIO_BUTTON', 'Yes,No'),
+(1, 'Medical Conditions', 'Do you have any medical conditions? (select all that apply)', 'TAGS', 'none,anxiety,insomnia,gastritis,stress,heart disease,back pain,high cholesterol,arthritis,diabetes,asthma,hypertension,other'),
+(1, 'Occupation', 'What is your job occupation?', 'TEXT', NULL),
+(1, 'Annual Income', 'What is your annual income?', 'NUMBER', NULL),
+(1, 'Age', 'What is your age?', 'NUMBER', NULL),
+(1, 'Sport Activities', 'What sport activities do you participate in? (select all that apply)', 'TAGS', 'cycling,running,hiking,tennis,gym,dancing,skiing,pilates,swimming,yoga,climbing,boxing,other');
+
+
+-- User Submissions
+-- Client 1: 158cm, 55.5kg, Non-smoker, anxiety, Insurance Underwriter, 57002, 26 years, cycling+running
+INSERT INTO submission (client_id, question_id, value, type) VALUES
+(1, 1, '158', 'NUMBER'),
+(1, 2, '55.5', 'NUMBER'),
+(1, 3, 'No', 'TEXT'),
+(1, 4, 'anxiety', 'TEXT'),
+(1, 5, 'Insurance Underwriter', 'TEXT'),
+(1, 6, '57002', 'NUMBER'),
+(1, 7, '26', 'NUMBER'),
+(1, 8, 'cycling; running', 'TEXT');
+
+-- Client 2: 165cm, 56.1kg, Non-smoker, none, Physiotherapist, 129907, 35 years, hiking
+INSERT INTO submission (client_id, question_id, value, type) VALUES
+(2, 1, '165', 'NUMBER'),
+(2, 2, '56.1', 'NUMBER'),
+(2, 3, 'No', 'TEXT'),
+(2, 4, 'none', 'TEXT'),
+(2, 5, 'Physiotherapist', 'TEXT'),
+(2, 6, '129907', 'NUMBER'),
+(2, 7, '35', 'NUMBER'),
+(2, 8, 'hiking', 'TEXT');
+
+-- Client 3: 179cm, 63.6kg, Non-smoker, insomnia, Marketing Specialist, 155842, 26 years, running+tennis
+INSERT INTO submission (client_id, question_id, value, type) VALUES
+(3, 1, '179', 'NUMBER'),
+(3, 2, '63.6', 'NUMBER'),
+(3, 3, 'No', 'TEXT'),
+(3, 4, 'insomnia', 'TEXT'),
+(3, 5, 'Marketing Specialist', 'TEXT'),
+(3, 6, '155842', 'NUMBER'),
+(3, 7, '26', 'NUMBER'),
+(3, 8, 'running; tennis', 'TEXT');
+
+-- Client 4: 182cm, 85.7kg, Non-smoker, gastritis+stress, Sales Manager, 109225, 22 years, gym+hiking+dancing
+INSERT INTO submission (client_id, question_id, value, type) VALUES
+(4, 1, '182', 'NUMBER'),
+(4, 2, '85.7', 'NUMBER'),
+(4, 3, 'No', 'TEXT'),
+(4, 4, 'gastritis; stress', 'TEXT'),
+(4, 5, 'Sales Manager', 'TEXT'),
+(4, 6, '109225', 'NUMBER'),
+(4, 7, '22', 'NUMBER'),
+(4, 8, 'gym; hiking; dancing', 'TEXT');
+
+-- Client 5: 191cm, 104.7kg, Non-smoker, heart disease+back pain+high cholesterol, UX Designer, 35000, 69 years, dancing+skiing+cycling
+INSERT INTO submission (client_id, question_id, value, type) VALUES
+(5, 1, '191', 'NUMBER'),
+(5, 2, '104.7', 'NUMBER'),
+(5, 3, 'No', 'TEXT'),
+(5, 4, 'heart disease; back pain; high cholesterol', 'TEXT'),
+(5, 5, 'UX Designer', 'TEXT'),
+(5, 6, '35000', 'NUMBER'),
+(5, 7, '69', 'NUMBER'),
+(5, 8, 'dancing; skiing; cycling', 'TEXT');
+
+-- Client 6: 187cm, 67.8kg, Non-smoker, arthritis+high cholesterol+back pain, Banking Associate, 79988, 66 years, cycling+pilates
+INSERT INTO submission (client_id, question_id, value, type) VALUES
+(6, 1, '187', 'NUMBER'),
+(6, 2, '67.8', 'NUMBER'),
+(6, 3, 'No', 'TEXT'),
+(6, 4, 'arthritis; high cholesterol; back pain', 'TEXT'),
+(6, 5, 'Banking Associate', 'TEXT'),
+(6, 6, '79988', 'NUMBER'),
+(6, 7, '66', 'NUMBER'),
+(6, 8, 'cycling; pilates', 'TEXT');
