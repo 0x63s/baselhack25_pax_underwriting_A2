@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import axios from "axios";
 
 function App() {
-  const [backendStatus, setBackendStatus] = useState('checking...');
-  const [aiStatus, setAiStatus] = useState('checking...');
-  const [algoStatus, setAlgoStatus] = useState('checking...');
+  const [backendStatus, setBackendStatus] = useState("checking...");
+  const [aiStatus, setAiStatus] = useState("checking...");
+  const [algoStatus, setAlgoStatus] = useState("checking...");
 
   useEffect(() => {
     // Check backend health
-    axios.get('/api/health')
-      .then(() => setBackendStatus('connected'))
-      .catch(() => setBackendStatus('disconnected'));
+    axios
+      .get("/api/health")
+      .then(() => setBackendStatus("connected"))
+      .catch(() => setBackendStatus("disconnected"));
 
     // Check AI backend health
-    axios.get('http://localhost:8001/health')
-      .then(() => setAiStatus('connected'))
-      .catch(() => setAiStatus('disconnected'));
+    axios
+      .get("http://localhost:8001/health")
+      .then(() => setAiStatus("connected"))
+      .catch(() => setAiStatus("disconnected"));
 
     // Check Algo backend health
-    axios.get('http://localhost:8002/health')
-      .then(() => setAlgoStatus('connected'))
-      .catch(() => setAlgoStatus('disconnected'));
+    axios
+      .get("http://localhost:8002/health")
+      .then(() => setAlgoStatus("connected"))
+      .catch(() => setAlgoStatus("disconnected"));
   }, []);
 
   return (

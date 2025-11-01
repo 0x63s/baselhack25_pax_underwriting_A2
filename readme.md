@@ -21,17 +21,20 @@ The application consists of four main services:
 ### Using Docker Compose (Recommended)
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd baselhack25_pax_underwriting_A2
 ```
 
 2. Build and start all services:
+
 ```bash
 docker-compose up --build
 ```
 
 3. Access the application:
+
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8080
 - AI Service: http://localhost:8001
@@ -58,6 +61,12 @@ cd code/backend
 
 The backend will be available at http://localhost:8080
 
+For running in dev version with hot reload:
+
+```bash
+docker compose -f code/docker-compose.yml -f code/docker-compose.dev.yml up --build
+```
+
 #### Backend AI (Python/FastAPI)
 
 ```bash
@@ -73,11 +82,13 @@ The AI service will be available at http://localhost:8001
 ## API Endpoints
 
 ### Backend (Java)
+
 - `GET /api/health` - Health check
 - `GET /api/info` - Service information
 - `GET /actuator/health` - Spring Boot actuator health
 
 ### Backend AI (Python)
+
 - `GET /` - Service information
 - `GET /health` - Health check
 - `POST /api/analyze` - Analyze underwriting application
@@ -99,6 +110,7 @@ docker-compose down
 ```
 
 To remove volumes as well:
+
 ```bash
 docker-compose down -v
 ```
@@ -106,21 +118,27 @@ docker-compose down -v
 ## Troubleshooting
 
 ### Port conflicts
+
 If you see port conflict errors, ensure no other services are running on ports 3000, 8080, 8001, or 5432.
 
 ### Container health checks
+
 Check the health status of services:
+
 ```bash
 docker-compose ps
 ```
 
 ### View logs
+
 View logs for all services:
+
 ```bash
 docker-compose logs -f
 ```
 
 View logs for a specific service:
+
 ```bash
 docker-compose logs -f backend
 docker-compose logs -f backend-ai
