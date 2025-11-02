@@ -34,9 +34,9 @@ user_data_sample = {
 }
 
 decision_thresholds =  {
-    "accept": 0.2,
-    "ask_for_info_addon": 0.1,
-    "reject_cutoff": 0.8
+    "accept": 0.25,
+    "ask_for_info_addon": 0.05,
+    "reject_cutoff": 0.7
 }
 
 def evaluate_bins(bins, user_value, scores):
