@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../../components/common/Card';
 import Button from '../../components/common/Button';
+import Table from '../../components/common/Table';
+import Loading from '../../components/common/Loading';
 import { offeringApi, questionApi, clientApi, applicationApi } from '../../services/api';
 import './AdminDashboard.css';
 
@@ -15,8 +17,12 @@ const AdminDashboard = () => {
     pendingReviews: 0,
   });
 
+  const [pendingLoading, setPendingLoading] = useState(false);
+  const [pendingApplications, setPendingApplications] = useState([]);
+
   useEffect(() => {
     loadStats();
+    loadPendingReviews();
   }, []);
 
   const loadStats = async () => {
@@ -38,6 +44,28 @@ const AdminDashboard = () => {
       });
     } catch (error) {
       console.error('Error loading stats:', error);
+    }
+  };
+
+  const loadPendingReviews = async () => {
+    setPendingLoading(true);
+    try {
+      const response = await applicationApi.getUnreviewedApplications();
+      setPendingApplications(response.data || []);
+    } catch (error) {
+      console.error('Error loading pending reviews:', error);
+      setPendingApplications([]);
+    } finally {
+      setPendingLoading(false);
+    }
+  };
+
+  const formatDate = (iso) => {
+    if (!iso) return '—';
+    try {
+      return new Date(iso).toLocaleString();
+    } catch {
+      return iso;
     }
   };
 
@@ -112,6 +140,46 @@ const AdminDashboard = () => {
               User View
             </Button>
           </div>
+        </Card>
+      </div>
+
+      <div className="pending-reviews">
+        <Card title={`Pending Reviews (${stats.pendingReviews})`}>
+          {pendingLoading ? (
+            <Loading />
+          ) : (
+            <Table
+              columns={[
+                { key: 'id', label: 'ID' },
+                {
+                  key: 'client',
+                  label: 'Client',
+                  render: (_, row) => `${row.client?.firstName || ''} ${row.client?.lastName || ''}`.trim() || '—',
+                },
+                {
+                  key: 'offering',
+                  label: 'Offering',
+                  render: (_, row) => row.offering?.name || '—',
+                },
+                {
+                  key: 'createdAt',
+                  label: 'Submitted',
+                  render: (val) => formatDate(val),
+                },
+                {
+                  key: 'actions',
+                  label: 'Actions',
+                  render: (_, row) => (
+                    <Button size="small" onClick={() => navigate(`/admin/applications?id=${row.id}`)}>
+                      Review
+                    </Button>
+                  ),
+                },
+              ]}
+              data={pendingApplications}
+              onRowClick={(row) => navigate(`/admin/applications?id=${row.id}`)}
+            />
+          )}
         </Card>
       </div>
     </div>
