@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Card from '../../components/common/Card';
-import Button from '../../components/common/Button';
-import { offeringApi, questionApi, clientApi, applicationApi } from '../../services/api';
-import './AdminDashboard.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Card from "../../components/common/Card";
+import Button from "../../components/common/Button";
+import {
+  offeringApi,
+  questionApi,
+  clientApi,
+  applicationApi,
+} from "../../services/api";
+import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -21,7 +26,13 @@ const AdminDashboard = () => {
 
   const loadStats = async () => {
     try {
-      const [offeringsRes, questionsRes, clientsRes, applicationsRes, unreviewedRes] = await Promise.all([
+      const [
+        offeringsRes,
+        questionsRes,
+        clientsRes,
+        applicationsRes,
+        unreviewedRes,
+      ] = await Promise.all([
         offeringApi.getAllOfferings().catch(() => ({ data: [] })),
         questionApi.getAllQuestions().catch(() => ({ data: [] })),
         clientApi.getAllClients().catch(() => ({ data: [] })),
@@ -37,7 +48,7 @@ const AdminDashboard = () => {
         pendingReviews: unreviewedRes.data.length,
       });
     } catch (error) {
-      console.error('Error loading stats:', error);
+      console.error("Error loading stats:", error);
     }
   };
 
@@ -64,51 +75,46 @@ const AdminDashboard = () => {
           value={stats.offerings}
           icon="📦"
           color="blue"
-          onClick={() => navigate('/admin/offerings')}
-        />
-        <StatCard
-          title="Total Questions"
-          value={stats.questions}
-          icon="❓"
-          color="green"
-          onClick={() => navigate('/admin/offerings')}
+          onClick={() => navigate("/admin/offerings")}
         />
         <StatCard
           title="Clients"
           value={stats.clients}
           icon="👥"
           color="purple"
-          onClick={() => navigate('/admin/clients')}
+          onClick={() => navigate("/admin/clients")}
         />
         <StatCard
           title="Applications"
           value={stats.applications}
           icon="📋"
           color="indigo"
-          onClick={() => navigate('/admin/applications')}
-        />
-        <StatCard
-          title="Pending Reviews"
-          value={stats.pendingReviews}
-          icon="⏳"
-          color="orange"
-          onClick={() => navigate('/admin/applications')}
+          onClick={() => navigate("/admin/applications")}
         />
       </div>
 
       <div className="quick-actions">
         <Card title="Quick Actions">
           <div className="action-buttons">
-            <Button onClick={() => navigate('/admin/offerings')} variant="primary">
+            <Button
+              onClick={() => navigate("/admin/offerings")}
+              variant="primary"
+            >
               Manage Offerings
             </Button>
-            <Button variant="success" onClick={() => navigate('/admin/applications')}>
+            <Button
+              variant="success"
+              onClick={() => navigate("/admin/applications")}
+            >
               Review Applications
             </Button>
-            <Button variant="secondary" onClick={() => navigate('/admin/clients')}>
+            <Button
+              variant="secondary"
+              onClick={() => navigate("/admin/clients")}
+            >
               View All Clients
             </Button>
-            <Button variant="secondary" onClick={() => navigate('/user')}>
+            <Button variant="secondary" onClick={() => navigate("/user")}>
               User View
             </Button>
           </div>
